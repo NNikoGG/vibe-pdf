@@ -2,6 +2,8 @@
 
 import { z } from "zod";
 import UploadFormInput from "./upload-form-input";
+import { useUploadThing } from "@/utils/uploadthing";
+import { toast } from "sonner";
 
 const schema = z.object({
   file: z
@@ -17,7 +19,28 @@ const schema = z.object({
 });
 
 export default function UploadForm() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const { startUpload, routeConfig } = useUploadThing("pdfUploader", {
+    onClientUploadComplete: () => {
+      console.log("uploaded successfully!");
+      toast.dismiss("upload-begin");
+      toast.success("Uploaded successfully!");
+    },
+    onUploadError: (err) => {
+      console.error("error occurred while uploading", err);
+      toast.dismiss("upload-begin");
+      toast.error("Error occured while uploading", {
+        description: err.message,
+      });
+    },
+    onUploadBegin: ({ file }) => {
+      console.log("upload has begun for", file);
+      toast.loading("Uploading...", {
+        id: "upload-begin",
+      });
+    },
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("submitted");
     const formData = new FormData(e.currentTarget);
@@ -27,11 +50,27 @@ export default function UploadForm() {
     console.log(validatedFields);
 
     if (!validatedFields.success) {
-      console.log(
-        validatedFields.error.flatten().fieldErrors.file?.[0] ?? "Invalid file"
-      );
+      toast.dismiss("upload-begin");
+      toast.error("Something went wrong", {
+        description:
+          validatedFields.error.flatten().fieldErrors.file?.[0] ??
+          "Invalid file",
+      });
       return;
     }
+
+    const resp = await startUpload([file]);
+    if (!resp) {
+      toast.dismiss("upload-begin");
+      toast.error("Something went wrong", {
+        description: "Please use a different file",
+      });
+      return;
+    }
+
+    toast.loading("📄 Processing PDF", {
+      description: "Hang tight! Our AI is reading through your document! ✨",
+    });
   };
 
   return (
