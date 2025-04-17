@@ -4,6 +4,7 @@ import { z } from "zod";
 import UploadFormInput from "./upload-form-input";
 import { useUploadThing } from "@/utils/uploadthing";
 import { toast } from "sonner";
+import { generatePdfSummary } from "@/actions/upload-actions";
 
 const schema = z.object({
   file: z
@@ -59,7 +60,9 @@ export default function UploadForm() {
       return;
     }
 
+    // Upload the file to uploadthing
     const resp = await startUpload([file]);
+    console.log(resp);
     if (!resp) {
       toast.dismiss("upload-begin");
       toast.error("Something went wrong", {
@@ -71,6 +74,11 @@ export default function UploadForm() {
     toast.loading("📄 Processing PDF", {
       description: "Hang tight! Our AI is reading through your document! ✨",
     });
+
+    // Parse the PDF using langchain
+    const summary = await generatePdfSummary(resp);
+
+    console.log({ summary });
   };
 
   return (
