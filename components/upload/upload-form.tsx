@@ -4,8 +4,12 @@ import { z } from "zod";
 import UploadFormInput from "./upload-form-input";
 import { useUploadThing } from "@/utils/uploadthing";
 import { toast } from "sonner";
-import { generatePdfSummary } from "@/actions/upload-actions";
+import {
+  generatePdfSummary,
+  storePdfSummaryAction,
+} from "@/actions/upload-actions";
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const schema = z.object({
   file: z
@@ -23,6 +27,7 @@ const schema = z.object({
 export default function UploadForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const { startUpload, routeConfig } = useUploadThing("pdfUploader", {
     onClientUploadComplete: () => {
@@ -88,18 +93,35 @@ export default function UploadForm() {
       const { data = null, message = null } = result || {};
 
       if (data) {
+        let storeResult: any;
         toast.loading("📄 Saving PDF", {
           description: "Hang tight! We are saving your summary! ✨",
         });
-        formRef.current?.reset();
-        // if (data.summary) {
-        //   // save the summary to the database
-        // }
+
+        if (data.summary) {
+          // save the summary to the database
+          storeResult = await storePdfSummaryAction({
+            summary: data.summary,
+            fileUrl: resp[0].serverData.file.url,
+            title: data.title,
+            fileName: file.name,
+          });
+          toast.success("✨ Summary Generated!", {
+            description:
+              "Your PDF has been successfully summarized and saved! 🎉",
+          });
+
+          formRef.current?.reset();
+          // redirect to the summary page
+          // router.push(`/summaries/${storeResult.data.id}`);
+        }
       }
     } catch (error) {
       setIsLoading(false);
       console.error("Error occured", error);
       formRef.current?.reset();
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
