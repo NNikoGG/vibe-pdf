@@ -1,9 +1,20 @@
 import BgGradient from "@/components/common/bg-gradient";
+import SummaryCard from "@/components/summaries/summary-card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Plus } from "lucide-react";
 import Link from "next/link";
 
 export default function DashboardPage() {
+  const summaries = [
+    {
+      id: "1",
+      title: "How to Build a Next.js App",
+      summary_text:
+        "In this tutorial, we'll build a simple Next.js app that allows users to create and manage a to-do list. We'll cover topics such as routing, data fetching, and state management. Let's get started!",
+      createdAt: "2025-04-20 11:50:56.970648+00",
+      status: "completed",
+    },
+  ];
   const uploadLimit = 5;
   return (
     <main className="min-h-screen">
@@ -44,6 +55,11 @@ export default function DashboardPage() {
                 for unlimited uploads.
               </p>
             </div>
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 sm:px-0">
+            {summaries.map((summary, index) => (
+              <SummaryCard key={index} summary={summary} />
+            ))}
           </div>
         </div>
       </div>
