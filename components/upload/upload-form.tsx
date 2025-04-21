@@ -86,6 +86,7 @@ export default function UploadForm() {
 
       toast.loading("📄 Processing PDF", {
         description: "Hang tight! Our AI is reading through your document! ✨",
+        id: "upload-processing",
       });
 
       // Parse the PDF using langchain
@@ -96,6 +97,7 @@ export default function UploadForm() {
         let storeResult: any;
         toast.loading("📄 Saving PDF", {
           description: "Hang tight! We are saving your summary! ✨",
+          id: "upload-saving",
         });
 
         if (data.summary) {
@@ -106,6 +108,8 @@ export default function UploadForm() {
             title: data.title,
             fileName: file.name,
           });
+          toast.dismiss("upload-processing");
+          toast.dismiss("upload-saving");
           toast.success("✨ Summary Generated!", {
             description:
               "Your PDF has been successfully summarized and saved! 🎉",
@@ -113,7 +117,7 @@ export default function UploadForm() {
 
           formRef.current?.reset();
           // redirect to the summary page
-          // router.push(`/summaries/${storeResult.data.id}`);
+          router.push(`/summaries/${storeResult.data.id}`);
         }
       }
     } catch (error) {
