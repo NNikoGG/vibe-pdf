@@ -1,21 +1,22 @@
 import BgGradient from "@/components/common/bg-gradient";
 import SummaryCard from "@/components/summaries/summary-card";
 import { Button } from "@/components/ui/button";
+import { getSummaries } from "@/lib/summaries";
+import { currentUser } from "@clerk/nextjs/server";
 import { ArrowRight, Plus } from "lucide-react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function DashboardPage() {
-  const summaries = [
-    {
-      id: "1",
-      title: "How to Build a Next.js App",
-      summary_text:
-        "In this tutorial, we'll build a simple Next.js app that allows users to create and manage a to-do list. We'll cover topics such as routing, data fetching, and state management. Let's get started!",
-      createdAt: "2025-04-20 11:50:56.970648+00",
-      status: "completed",
-    },
-  ];
+export default async function DashboardPage() {
+  const user = await currentUser();
+  const userId = user?.id;
+
+  if (!userId) {
+    return redirect("/sign-in");
+  }
+
   const uploadLimit = 5;
+  const summaries = await getSummaries(userId);
   return (
     <main className="min-h-screen">
       <BgGradient className="from-emerald-200 via-teal-200 to-cyan-200" />
