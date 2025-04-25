@@ -18,9 +18,9 @@ export default async function RootLayout({
   );
 
   // todo
-  if (!hasActiveSubscription) {
-    return <UpgradeRequired />;
-  }
+  // if (!hasActiveSubscription) {
+  //   return <UpgradeRequired />;
+  // }
 
   return <>{children}</>;
 }
