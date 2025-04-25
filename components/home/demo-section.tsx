@@ -1,4 +1,36 @@
 import { Pizza } from "lucide-react";
+import { SummaryViewer } from "../summaries/summary-viewer";
+import { MotionDiv, MotionH3 } from "@/components/common/motion-wrapper";
+
+const DEMO_SUMMARY = `# Quick Overview
+🎯 This is a quick overview of the document's content.
+• 📄 Type: Business Plan
+• 👥 For: Small Business Owners
+
+# Key Highlights
+• 🚀 Key Point 1: This is a key point that highlights the importance of the document.
+• ⭐ Key Point 2: This is another key point that adds value to the document.
+• 💫 Key Point 3: This is a key point that emphasizes the unique value of the document.
+
+# Why It Matters
+• 💡 This is a short, impactful paragraph explaining the real-world impact of the document.
+
+# Main Points
+• 🎯 Main insight or finding: This is the main takeaway of the document.
+• 💪 Key strength or advantage: This is a key strength of the document.
+• 🔥 Important outcome or result: This is an important outcome of the document.
+
+# Pro Tips
+• ⭐ First practical recommendation: This is a practical tip that can help readers.
+• 💎 Second valuable insight: This is a valuable insight that adds value to the document.
+• 🌟 Third actionable advice: This is an actionable advice that can help readers.
+
+# Key Terms to Know
+• 📚 First key term: This is a key term that readers should know.
+• 🔍 Second key term: This is another key term that readers should know.
+
+# Bottom Line
+• 💫 The most important takeaway: This is the most important takeaway of the document.`;
 
 export default function DemoSection() {
   return (
@@ -21,18 +53,30 @@ export default function DemoSection() {
             <Pizza className="h-6 w-6 text-rose-500" />
           </div>
           <div className="text-center mb-16">
-            <h3 className="font-bold text-3xl max-w-2xl mx-auto px-4 sm:px-6">
+            <MotionH3
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="font-bold text-3xl max-w-2xl mx-auto px-4 sm:px-6"
+            >
               Watch how Sommaire transforms{" "}
               <span className="bg-linear-to-r from-rose-500 to-rose-700 bg-clip-text text-transparent">
                 this Next.js course PDF
               </span>{" "}
               into an easy-to-read summary!
-            </h3>
+            </MotionH3>
           </div>
+        </div>
 
-          <div className="flex justify-center items-center px-2 sm:px-4 lg:px-6 ">
+        <div className="flex justify-center items-center px-2 sm:px-4 lg:px-6">
+          <MotionDiv
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
             {/* Summary Viewer */}
-          </div>
+            <SummaryViewer summary={DEMO_SUMMARY} />
+          </MotionDiv>
         </div>
       </div>
     </section>
