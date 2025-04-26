@@ -58,6 +58,7 @@ export async function generatePdfSummary(
 
     let summary;
     try {
+      // Using gemini for now as it's free
       summary = await generateSummaryFromGemini(pdfText);
       console.log({ summary });
     } catch (error) {
