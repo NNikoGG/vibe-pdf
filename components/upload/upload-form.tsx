@@ -45,8 +45,8 @@ export default function UploadForm() {
         description: err.message,
       });
     },
-    onUploadBegin: ({ file }) => {
-      console.log("upload has begun for", file);
+    onUploadBegin: (data) => {
+      console.log("upload has begun for", data);
       toast.loading("Uploading...", {
         id: "upload-begin",
       });
@@ -92,7 +92,7 @@ export default function UploadForm() {
         id: "upload-processing",
       });
 
-      const uploadFileUrl = resp[0].serverData.file.url;
+      const uploadFileUrl = resp[0].serverData.fileUrl;
 
       let storeResult: any;
 

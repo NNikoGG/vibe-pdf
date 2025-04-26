@@ -3,34 +3,34 @@ import { SummaryViewer } from "../summaries/summary-viewer";
 import { MotionDiv, MotionH3 } from "@/components/common/motion-wrapper";
 
 const DEMO_SUMMARY = `# Quick Overview
-🎯 This is a quick overview of the document's content.
-• 📄 Type: Business Plan
-• 👥 For: Small Business Owners
+🎯 This is a quick overview of NextJS 15 and its new features.
+• 📄 Type: Framework Release Notes
+• 👥 For: Web Developers and Frontend Engineers
 
 # Key Highlights
-• 🚀 Key Point 1: This is a key point that highlights the importance of the document.
-• ⭐ Key Point 2: This is another key point that adds value to the document.
-• 💫 Key Point 3: This is a key point that emphasizes the unique value of the document.
+• 🚀 Key Point 1: Next.js 15 introduces partial pre-rendering (PPR) for even faster page loads.
+• ⭐ Key Point 2: Improved Turbopack performance makes local development extremely fast.
+• 💫 Key Point 3: Enhanced support for Server Components to build more dynamic and scalable apps.
 
 # Why It Matters
-• 💡 This is a short, impactful paragraph explaining the real-world impact of the document.
+• 💡 Next.js 15 empowers developers to create highly performant, dynamic websites with minimal complexity, improving user experience and developer efficiency.
 
 # Main Points
-• 🎯 Main insight or finding: This is the main takeaway of the document.
-• 💪 Key strength or advantage: This is a key strength of the document.
-• 🔥 Important outcome or result: This is an important outcome of the document.
+• 🎯 Main insight or finding: Partial pre-rendering (PPR) bridges the gap between static and dynamic content delivery.
+• 💪 Key strength or advantage: Turbopack delivers up to 10x faster local builds compared to Webpack.
+• 🔥 Important outcome or result: Applications load faster and scale better with improved server-first architecture.
 
 # Pro Tips
-• ⭐ First practical recommendation: This is a practical tip that can help readers.
-• 💎 Second valuable insight: This is a valuable insight that adds value to the document.
-• 🌟 Third actionable advice: This is an actionable advice that can help readers.
+• ⭐ First practical recommendation: Leverage partial pre-rendering for critical content to maximize speed.
+• 💎 Second valuable insight: Optimize your usage of Server Components for efficient data fetching.
+• 🌟 Third actionable advice: Update to the latest version of Turbopack to benefit from all performance gains.
 
 # Key Terms to Know
-• 📚 First key term: This is a key term that readers should know.
-• 🔍 Second key term: This is another key term that readers should know.
+• 📚 Partial Pre-rendering (PPR): A method to combine static and dynamic page rendering for speed and flexibility.
+• 🔍 Server Components: React components that run on the server, reducing client-side JavaScript.
 
 # Bottom Line
-• 💫 The most important takeaway: This is the most important takeaway of the document.`;
+• 💫 The most important takeaway: Next.js 15 is a major leap toward building faster, more scalable, and dynamic web applications effortlessly.`;
 
 export default function DemoSection() {
   return (
@@ -59,7 +59,7 @@ export default function DemoSection() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="font-bold text-3xl max-w-2xl mx-auto px-4 sm:px-6"
             >
-              Watch how Sommaire transforms{" "}
+              Watch how VibePDF transforms{" "}
               <span className="bg-linear-to-r from-rose-500 to-rose-700 bg-clip-text text-transparent">
                 this Next.js course PDF
               </span>{" "}
