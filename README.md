@@ -1,36 +1,170 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VibePDF
 
-## Getting Started
+A modern web application for processing and summarizing PDF documents using AI, built with Next.js 15 and TypeScript.
 
-First, run the development server:
+![Project Image](./public/opengraph-image.png)
+
+## 🌟 Features
+
+- **PDF Processing & Summarization**
+
+  - Upload and process PDF documents
+  - AI-powered document summarization using multiple models (OpenAI and Gemini)
+  - Secure file storage and management
+
+- **Authentication & Authorization**
+
+  - Secure user authentication powered by Clerk
+  - Protected routes and API endpoints
+  - User profile management
+
+- **Payment Integration**
+
+  - Stripe payment processing
+  - Subscription management
+  - Usage tracking and billing
+
+## 🛠️ Technologies Used
+
+- **Frontend:**
+
+  - Next.js 15.3.0 (with App Router)
+  - React 19
+  - Tailwind CSS
+  - ShadCN UI components
+  - Lucide React icons
+  - Motion
+
+- **Backend:**
+
+  - Next.js API routes
+  - NeonDB (PostgreSQL)
+  - LangChain
+  - OpenAI / Gemini
+
+- **Authentication:**
+
+  - Clerk
+
+- **File Handling:**
+
+  - UploadThing
+
+- **Payments:**
+
+  - Stripe
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (Latest LTS version recommended)
+- PostgreSQL database (NeonDB)
+- Clerk account for authentication
+- UploadThing account for file uploads
+- Stripe account for payments
+- OpenAI API key and/or Gemini API key
+
+### Environment Variables
+
+Create a `.env.local` file with the following variables:
+
+```env
+# Authentication (Clerk)
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+# Database (NeonDB)
+DATABASE_URL=
+
+# File Upload (UploadThing)
+UPLOADTHING_TOKEN=
+
+# AI Services
+OPENAI_API_KEY=
+GEMINI_API_KEY=
+
+# Payments (Stripe)
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+
+# Node Environment (development or production)
+NODE_ENV=
+```
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/NNikoGG/vibe-pdf.git
+cd vibe-pdf
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Set up the database:
+
+```bash
+# Run the SQL schema
+# Use the schema.sql file provided in the project
+```
+
+4. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🏗️ Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `/app` - Next.js application routes and layouts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  - `/api` - API routes
+  - `/logged-in` - Protected routes
+  - `/sign-in`, `/sign-up` - Authentication pages
 
-## Learn More
+- `/actions` - Server actions
 
-To learn more about Next.js, take a look at the following resources:
+  - `upload-actions.ts` - File upload handling
+  - `summary-actions.ts` - PDF summarization logic
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `/components` - React components
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  - `/upload` - File upload components
+  - `/ui` - Shared UI components
+  - `/common` - Common components
+  - `/summaries` - Summary-related components
+  - `/home` - Homepage components
 
-## Deploy on Vercel
+- `/lib` - Core functionality
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  - `user.ts` - User management
+  - `summaries.ts` - Summary processing
+  - `payments.ts` - Payment handling
+  - `langchain.ts` - AI integration
+  - `openai.ts` - OpenAI configuration
+  - `geminiai.ts` - Gemini configuration
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `/utils` - Helper functions and constants
+  - `constants.ts` - Application constants
+  - `prompts.ts` - AI prompt templates
+  - `summary-helper.ts` - Summary processing utilities
+
+## 📊 Database Schema
+
+The application uses a PostgreSQL database with the following main tables:
+
+- `users` - User information and subscription status
+- `pdf_summaries` - Processed PDF documents and their summaries
+- `payments` - Payment and subscription records
+
+![Database Schema](./public/vibe-pdf-schema.png)
+
+## 👥 Contributions
+
+Contributions are welcome! If you have any ideas or suggestions for improvements, please feel free to open an issue or submit a pull request.
