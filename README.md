@@ -1,6 +1,6 @@
 # VibePDF
 
-A modern web application for processing and summarizing PDF documents using AI, built with Next.js 15 and TypeScript.
+A modern web application for processing and summarizing PDF documents using AI, built with Next.js 15 and TypeScript. Click [here](https://vibe-pdf.vercel.app/) to check out the live demo!
 
 ![Project Image](./public/opengraph-image.png)
 
