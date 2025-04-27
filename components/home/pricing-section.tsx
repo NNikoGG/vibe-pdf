@@ -115,6 +115,18 @@ export default function PricingSection() {
             Pricing
           </h2>
         </MotionDiv>
+
+        {/* // Test mode warning */}
+        <MotionDiv
+          variants={itemVariants}
+          className="bg-yellow-100 p-4 rounded-lg mb-8 text-center"
+        >
+          <p className="text-yellow-800 text-sm font-medium">
+            System currently in test mode • DO NOT USE REAL CREDIT CARDS • All
+            plans limited to 5 PDF summaries
+          </p>
+        </MotionDiv>
+
         <div className="relative flex justify-center flex-col lg:flex-row items-center lg:items-stretch gap-8">
           {pricingPlans.map((plan) => (
             <PricingCard key={plan.id} {...plan} />
